@@ -103,7 +103,7 @@ const Profile = () => {
         {/* Navbar for logout  */}
         <nav className='bg-[#F5F2EB] py-2 px-4 flex justify-between items-center rounded-full shadow-sm'>
           <img src='/images/button-svg.png' alt="Profile" className='w-10 h-10 ' />
-          <h1 className='text-lg font-semibold font-poppins text-[#03071E]/80 font-thin '>Profile</h1>
+          <h1 className='text-lg font-poppins text-[#03071E]/80 font-thin '>Profile</h1>
           <div
             onClick={handleLogout}
             className="text-sm shadow-sm bg-white p-2 rounded-full font-thin font-poppins flex items-center justify-center select-none text-[#03071E]/80"> <LogOut strokeWidth={0.75} /> logout</div>
