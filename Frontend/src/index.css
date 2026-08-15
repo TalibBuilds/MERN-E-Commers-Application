@@ -22,21 +22,17 @@
   font-style: normal;
 }
 
-/* 2. Consolidated Unified Tailwind v4 Configuration Group */
 @theme {
-  /* Font Family utilities initialization */
   --font-poppins: 'poppins', sans-serif;
   --font-futura: 'futura', sans-serif;
   --font-cinzel: 'cinzel', serif;
 
-  /* Shimmer infrastructure core definitions */
   --animate-shimmer: shimmer 1.5s infinite linear;
   @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
   }
 
-  /* Structural Dynamic Ambient Layout Fluid animations */
   --animate-liquid-glow: liquidGlow 14s infinite alternate ease-in-out;
   @keyframes liquidGlow {
     0% { transform: translate(0px, 0px) scale(1); }
@@ -54,7 +50,17 @@
   }
 }
 
-/* 3. Utility Layout Structural Design Wrappers */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .liquid-bg-wrapper {
   position: relative;
   width: 100%;
@@ -66,7 +72,6 @@
   justify-content: center;
 }
 
-/* Base structural abstraction properties for pseudo layers */
 .liquid-bg-wrapper::before,
 .liquid-bg-wrapper::after {
   content: "";
@@ -93,26 +98,24 @@
   animation: var(--animate-liquid-glow-reverse);
 }
 
-/* 4. Glassmorphism Adaptive Layout Container Modules */
 .modern-glass-container {
   position: relative;
   z-index: 2;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05)), 
-              linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.03));
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.03));
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-top-color: rgba(255, 255, 255, 0.45);
   border-left-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03), 
-              inset 0 1px 1px rgba(255, 255, 255, 0.4), 
-              inset 0 10px 20px rgba(255, 255, 255, 0.15), 
-              inset 0 -5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+    inset 0 10px 20px rgba(255, 255, 255, 0.15),
+    inset 0 -5px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* Conditional browser platform fallback handlers using native feature querying */
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .modern-glass-container {
-    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02)), 
-                linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.01));
+    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02)),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.01));
     -webkit-backdrop-filter: blur(25px) saturate(210%) contrast(110%);
     backdrop-filter: blur(25px) saturate(210%) contrast(110%);
   }

@@ -24,18 +24,21 @@ app.use(express.json())
 app.use(cookieparser())
 
 
-
-
 // Import authentication routes
 const authRoutes = require('./Routes/auth.routes');
-
 // *****ADMIN ACESS ROUES*******
-const adminRoutes= require('./Routes/admin.routes');
+const adminRoutes = require('./Routes/admin.routes');
+// food fetching api routes****//
+const foodRoute = require('./Routes/food.routes')
+
 
 // Register authentication routes under /api/auth
 app.use('/api/auth', authRoutes);
 
 // admim****routes
 app.use('/api/admin', adminRoutes);
+
+//  food fetching api ***
+app.use('/api/food', foodRoute)
 
 module.exports = app;

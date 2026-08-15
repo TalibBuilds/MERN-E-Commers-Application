@@ -63,9 +63,9 @@ const App = () => {
   // show the branded intro once, then reveal the real app***
   const [showIntro, setShowIntro] = useState(true)
 
-  if (showIntro) {
-    return <InitialLoader onDone={() => setShowIntro(false)} />
-  }
+  // if (showIntro) {
+  //   return <InitialLoader onDone={() => setShowIntro(false)} />
+  // }
 
   // 3. WRAP THE RENDERED RETURN WITH <ReactLenis root>
   return (
