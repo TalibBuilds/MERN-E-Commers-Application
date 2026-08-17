@@ -13,9 +13,9 @@ import { setUser } from "../redux/userSlice";
 
 const navLinks = [
     { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
-    { to: "/menu", label: "Menu" },
     { to: "/delivery", label: "Delivery" },
+    { to: "/menu", label: "Menu" },
+    { to: "/about", label: "About" },
     { to: "/profile", label: "Profile" }
 ];
 
@@ -204,7 +204,7 @@ const Navbar = () => {
                                         repeat: Infinity,
                                         ease: "easeInOut",
                                     }}
-                                    className="inline-block"    
+                                    className="inline-block"
                                 >
                                     {currentUser.userName}
                                 </motion.span>
@@ -218,7 +218,7 @@ const Navbar = () => {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 10 }}
                                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                                    className="tabular-nums text-sm sm:text-sm text-gray-600 font-poppins overflow-hidden ">
+                                    className="tabular-nums text-[11px] sm:text-sm text-gray-600 font-poppins overflow-hidden ">
                                     <span className="text-[#E85D04]">
                                         {textOptions[textIndex]}
                                     </span>
@@ -257,20 +257,19 @@ const Navbar = () => {
 
                                     )
                                 ) :
-                                
-                                //    Search input button *** 
-                                   <div className=" w-full  max-w-md shadow rounded-full bg-[#F48C05] flex items-center justify-center overflow-hidden mx-auto text-white">
 
+                                    //  Search input button *** 
+                                    <div className="w-full max-w-md mx-auto flex items-center rounded-full bg-[#F48C05] shadow-md overflow-hidden">
                                         <input
                                             id="food-search"
                                             type="text"
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                             placeholder="Search momo, pizza, burger..."
-                                            className="w-full border border-white/10 bg-white/5 px-5 py-4 text-md font-cinzel text-[#F5F2EB]placeholder:text-stone-400 focus:shadow-lg focus:outline-none"
+                                            className="flex-1 min-w-0 bg-transparent px-5 py-4 text-sm md:text-base font-cinzel text-[#F5F2EB] placeholder:text-[#F5F2EB]/70 focus:outline-none"
                                         />
-                                        <div className='flex items-center justify-center pr-4'>
-                                            <Search />
+                                        <div className="flex items-center justify-center pr-5 text-[#F5F2EB]">
+                                            <Search size={20} />
                                         </div>
                                     </div>
                             }

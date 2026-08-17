@@ -1,34 +1,62 @@
+import { easeIn, motion } from "motion/react";
 
-const FoodCard = ({ image, foodName, description, price }) => {
-  return (
-    <div className="w-full aspect-[3/4] bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col overflow-hidden hover:shadow-md transition-shadow">
-      {/* Image takes a fixed share of the card's height so text area stays consistent */}
-      <div className="w-full h-[40%] bg-gray-100 overflow-hidden">
-        <img
-          src={image}
-          alt={foodName}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
+const FoodCard = ({
+    foodImage,
+    foodName,
+    description,
+    price
+}) => {
 
-      <div className="flex-1 flex flex-col justify-center items-center text-center gap-1 p-2 sm:p-3 overflow-hidden">
-        <h3 className="text-[11px] sm:text-sm md:text-base font-semibold text-gray-900 leading-tight line-clamp-2">
-          {foodName}
-        </h3>
-        <p className="text-[9px] sm:text-xs text-gray-500 leading-snug line-clamp-2">
-          {description}
-        </p>
-      </div>
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.7,  }}
+            whileInView={{ opacity: 1, scale: 1, }}
+            transition={{ ease: easeIn, duration: 0.7,type:"spring",stiffness:400,damping:10}}
+            whileTap={{scale:0.95}}
+            viewport={{ once: true }}
+            className="w-full aspect-[3/4] rounded-lg flex flex-col overflow-hidden shadow-lg hover:shadow-md transition-shadow cursor-pointer">
 
-      <div className="pb-2 sm:pb-3 pt-1 border-t border-gray-100 text-center">
-        <span className="text-[11px] sm:text-sm font-bold text-emerald-600">
-          ₹{price}
-        </span>
-      </div>
-    </div>
-  );
-}
+            {/* Image */}
+            <div className="w-full h-40 sm:h-36 md:h-60 overflow-hidden">
 
+                <img
+                    src={foodImage}
+                    alt={foodName}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    loading="lazy"
+                    onError={(e) => {
+                        e.currentTarget.src = "/images/food-placeholder.png";
+                    }}
+                />
+
+            </div>
+
+
+            {/* Food information */}
+            <div className="flex-1 flex flex-col justify-center items-center text-center gap-0  sm:p-3 overflow-hidden select-none">
+
+                <h3 className="text-[14px] sm:text-sm md:text-base font-semibold text-gray-900 leading-tight line-clamp-2 select-none">
+                    {foodName}
+                </h3>
+
+                <p className="text-[12px] sm:text-xs text-gray-500 leading-snug line-clamp-2 select-none">
+                    {description}
+                </p>
+
+            </div>
+
+            {/* Price */}
+            <div className="pb-2 sm:pb-3 pt-1 border-t border-gray-100 text-center">
+
+                <span className="text-[13px] sm:text-sm font-bold text-[#E85D04]">
+                    ₹{price}
+                </span>
+
+            </div>
+
+        </motion.div>
+    );
+};
 
 export default FoodCard;
+

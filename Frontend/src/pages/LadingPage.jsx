@@ -2,6 +2,47 @@ import { useNavigate } from 'react-router-dom';
 import ResponsiveBanner from '../components/ResponsiveBanner';
 import { motion } from 'motion/react';
 import { ArrowBigDownDash } from 'lucide-react'
+import SliderBanner from '../components/SliderBanner'
+
+
+const slides = [
+  {
+    desktop: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&h=500&fit=crop",
+    mobile: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=1000&fit=crop",
+    alt: "Summer Sale",
+  },
+  {
+    desktop: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&h=500&fit=crop",
+    mobile: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=1000&fit=crop",
+    alt: "New Arrivals",
+  },
+  {
+    desktop: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1600&h=500&fit=crop",
+    mobile: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=1000&fit=crop",
+    alt: "Fresh Food Deals",
+  },
+  {
+    desktop: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1600&h=500&fit=crop",
+    mobile: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=800&h=1000&fit=crop",
+    alt: "Weekend Offer",
+  },
+  {
+    desktop: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&h=500&fit=crop",
+    mobile: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=1000&fit=crop",
+    alt: "Combo Pack",
+  },
+  {
+    desktop: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1600&h=500&fit=crop",
+    mobile: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&h=1000&fit=crop",
+    alt: "Festive Special",
+  },
+  {
+    desktop: "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1600&h=500&fit=crop",
+    mobile: "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&h=1000&fit=crop",
+    alt: "Free Delivery",
+  },
+];
+ 
 
 const LadingPage = () => {
   const navigate = useNavigate();
@@ -55,6 +96,9 @@ const LadingPage = () => {
       </section>
 
       {/* Section 2 */}
+<SliderBanner slides={slides} />
+
+      {/* Section 3 */}
       <section className='h-screen md:h-auto  flex md:flex-row flex-col p-10 gap-5 '>
         <div
           className=" p-2 relative flex justify-center items-center"

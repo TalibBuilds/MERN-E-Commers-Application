@@ -78,6 +78,7 @@ async function getAllFoods(req, res) {
             totalPages: Math.ceil(totalFoods / parsedLimit) || 1,
             foods,
         });
+        
     } catch (error) {
         console.error('GetAllFoods error:', error);
         return res.status(500).json({

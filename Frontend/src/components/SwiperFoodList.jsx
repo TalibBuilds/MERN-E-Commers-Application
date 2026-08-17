@@ -1,93 +1,59 @@
-import FoodCard from '../components/FoodCard'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
+import FoodCard from '../components/FoodCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-const SwiperFoodList = ({ items }) => {
-    console.log("Swipercard rerender")
+const SwiperFoodList = ({ items = [], category }) => {
+
+    if (!items.length) {
+        return null;
+    }
+
     return (
-        <>
-            <div className="min-h-2xl bg-gray-50 p-3 sm:p-6">
+        <section className="min-h-2xl  p-3 sm:p-6 lg:pt-25">
 
-                <div className=' rounded-xl p-2 bg-gray-200/50'>
-                    <h1 className='font-cinzel pl-2 pb-3'>Momos Section</h1>
-                    <Swiper
-                        navigation
-                        pagination={{ clickable: true }}
-                        spaceBetween={16}
-                        slidesPerView={2}
-                        breakpoints={{
-                            640: { slidesPerView: 3 },
-                            768: { slidesPerView: 4 },
-                            1024: { slidesPerView: 5 },
-                        }}
-                        className="w-full"
-                    >
-                        {items.map((item, i) => (
-                            <SwiperSlide key={i}>
-                                <FoodCard {...item} />
-                            </SwiperSlide>
+            <div
+                
+                className="rounded-xl p-2 bg-gray-200/50">
 
-                        ))}
-                    </Swiper>
-                </div>
+                <h2 className="font-cinzel font-extrabold pl-3 pb-3 md:text-2xl text-[#F48C05]">
+                    {category}
+                </h2>
+
+                <Swiper
+                    navigation
+                    pagination={{ clickable: true }}
+                    spaceBetween={16}
+                    slidesPerView={2}
+                    breakpoints={{
+                        640: {
+                            slidesPerView: 3
+                        },
+                        768: {
+                            slidesPerView: 4
+                        },
+                        1024: {
+                            slidesPerView: 5
+                        }
+                    }}
+                    className="w-full"
+                >
+
+                    {items.map((item) => (
+                        <SwiperSlide key={item._id}>
+                            <FoodCard {...item} />
+                        </SwiperSlide>
+                    ))}
+
+                </Swiper>
+
             </div>
-            <div className="min-h-2xl bg-gray-50 p-3 sm:p-6">
 
-                <div className=' rounded-xl p-2 bg-gray-200/50'>
-                    <h1 className='font-cinzel pl-2 pb-3'>Momos Section</h1>
-                    <Swiper
-                        navigation
-                        pagination={{ clickable: true }}
-                        spaceBetween={16}
-                        slidesPerView={2}
-                        breakpoints={{
-                            640: { slidesPerView: 3 },
-                            768: { slidesPerView: 4 },
-                            1024: { slidesPerView: 5 },
-                        }}
-                        className="w-full"
-                    >
+        </section>
+    );
+};
 
-                        {items.map((item, i) => (
-                            <SwiperSlide key={i}>
-                                <FoodCard {...item} />
-                            </SwiperSlide>
-
-                        ))}
-                    </Swiper>
-                </div>
-            </div>
-            <div className="min-h-2xl bg-gray-50 p-3 sm:p-6">
-
-                <div className=' rounded-xl p-2 bg-gray-200/50'>
-                    <h1 className='font-cinzel pl-2 pb-3'>Momos Section</h1>
-                    <Swiper
-                        navigation
-                        pagination={{ clickable: true }}
-                        spaceBetween={16} 
-                        slidesPerView={2}
-                        breakpoints={{
-                            640: { slidesPerView: 3 },
-                            768: { slidesPerView: 4 },
-                            1024: { slidesPerView: 5 },
-                        }}
-                        className="w-full"
-                    >
-                        {items.map((item, i) => (
-                            <SwiperSlide key={i}>
-                                <FoodCard {...item} />
-                            </SwiperSlide>
-
-                        ))}
-                    </Swiper>
-                </div>
-            </div>
-        </>
-    )
-}
-
-export default SwiperFoodList
+export default SwiperFoodList;
