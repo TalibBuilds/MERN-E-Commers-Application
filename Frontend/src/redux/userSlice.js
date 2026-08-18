@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    currentUser: null
+    currentUser: JSON.parse(localStorage.getItem("currentUser")) || null
 };
 
 export const userSlice = createSlice({
@@ -9,10 +9,12 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.currentUser = action.payload // for data save current user****
+            state.currentUser = action.payload;
+            localStorage.setItem("currentUser", JSON.stringify(action.payload));
         },
         clearUser: (state) => {
-            state.currentUser = null; //**for logout
+            state.currentUser = null;
+            localStorage.removeItem("currentUser");
         }
     }
 })

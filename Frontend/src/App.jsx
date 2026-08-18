@@ -29,10 +29,15 @@ const Footer = lazy(() => import('./components/Footer'))
 // admin pages
 const UploadFood = lazy(() => import('./pages/admin pages/UploadFood'))
 
-const ProtectedRoute = ({ currentUser, children }) => {
+const ProtectedRoute = ({ currentUser, children, requireAdmin = false }) => {
   if (!currentUser) {
     return <Navigate to="/login" replace />
   }
+  
+  if (requireAdmin && currentUser.role !== 'admin') {
+    return <Navigate to="/" replace />
+  }
+  
   return children
 }
 
@@ -96,7 +101,7 @@ const App = () => {
             <Route
               path="/admin/upload-food"
               element={
-                <ProtectedRoute currentUser={currentUser}>
+                <ProtectedRoute currentUser={currentUser} requireAdmin={true}>
                   <UploadFood />
                 </ProtectedRoute>
               }
