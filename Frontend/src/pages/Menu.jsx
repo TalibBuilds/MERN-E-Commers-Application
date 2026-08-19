@@ -91,7 +91,7 @@ const Menu = () => {
 
             setSelectedFood(null);
             setQuantity(1);
-            toast.success("Order Confirm")
+            toast.success("Order Added")
             navigate('/orders')
 
         } catch (err) {
