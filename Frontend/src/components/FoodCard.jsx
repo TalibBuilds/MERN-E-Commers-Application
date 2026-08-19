@@ -4,15 +4,17 @@ const FoodCard = ({
     foodImage,
     foodName,
     description,
-    price
+    price,
+    onSelect
 }) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.7,  }}
+            onClick={onSelect}
+            initial={{ opacity: 0, scale: 0.7, }}
             whileInView={{ opacity: 1, scale: 1, }}
-            transition={{ ease: easeIn, duration: 0.7,type:"spring",stiffness:400,damping:10}}
-            whileTap={{scale:0.95}}
+            transition={{ ease: easeIn, duration: 0.7, type: "spring", stiffness: 400, damping: 10 }}
+            whileTap={{ scale: 0.95 }}
             viewport={{ once: true }}
             className="w-full aspect-[3/4] rounded-lg flex flex-col overflow-hidden shadow-lg hover:shadow-md transition-shadow cursor-pointer">
 
@@ -28,7 +30,6 @@ const FoodCard = ({
                         e.currentTarget.src = "/images/food-placeholder.png";
                     }}
                 />
-
             </div>
 
 

@@ -19,7 +19,7 @@ const InitialLoader = lazy(() => import('./components/InitialLoader'))
 // lasy load component***
 const LadingPage = lazy(() => import('./pages/LadingPage'))
 const About = lazy(() => import('./pages/About'))
-const Delivery = lazy(() => import('./pages/Delivery'))
+const Orders = lazy(() => import('./pages/Orders'))
 const Menu = lazy(() => import('./pages/Menu'))
 const Profile = lazy(() => import('./pages/Profile'))
 const Register = lazy(() => import('./pages/Register'))
@@ -68,9 +68,9 @@ const App = () => {
   // show the branded intro once, then reveal the real app***
   const [showIntro, setShowIntro] = useState(true)
 
-  if (showIntro) {
-    return <InitialLoader onDone={() => setShowIntro(false)} />
-  }
+  // if (showIntro) {
+  //   return <InitialLoader onDone={() => setShowIntro(false)} />
+  // }
 
   // 3. WRAP THE RENDERED RETURN WITH <ReactLenis root>
   return (
@@ -90,7 +90,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<LadingPage />} />
             <Route path='/about' element={<About />} />
-            <Route path='/delivery' element={<Delivery />} />
+            <Route path='/orders' element={<Orders />} />
             <Route path='/menu' element={<Menu />} />
             <Route path='/profile' element={<Profile /> }/>
             

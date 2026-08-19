@@ -39,7 +39,7 @@ const slides = [
   {
     desktop: "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1600&h=500&fit=crop",
     mobile: "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&h=1000&fit=crop",
-    alt: "Free Delivery",
+    alt: "Free orders",
   },
 ];
  

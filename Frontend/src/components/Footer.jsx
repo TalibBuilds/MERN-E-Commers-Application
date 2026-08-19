@@ -5,7 +5,7 @@ const shortcuts = [
     { label: "Home", to: "/" },
     { label: "Menu", to: "/menu" },
     { label: "About", hash: "/about" },
-    { label: "Delivery", hash: "/delivery" },
+    { label: "Orders", hash: "/orders" },
     { label: "Profile", to: "/profile" },
     { label: "Contact", hash: "/contact" },
 ];

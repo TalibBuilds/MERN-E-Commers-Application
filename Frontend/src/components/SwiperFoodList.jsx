@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const SwiperFoodList = ({ items = [], category }) => {
+const SwiperFoodList = ({ items = [], category, onFoodSelect }) => {
 
     if (!items.length) {
         return null;
@@ -44,7 +44,7 @@ const SwiperFoodList = ({ items = [], category }) => {
 
                     {items.map((item) => (
                         <SwiperSlide key={item._id}>
-                            <FoodCard {...item} />
+                            <FoodCard {...item} onSelect={() => onFoodSelect(item)} />
                         </SwiperSlide>
                     ))}
 

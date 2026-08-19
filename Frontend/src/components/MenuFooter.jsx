@@ -5,7 +5,7 @@ import { useAnimate } from 'motion/react';
 
 const footerLinks = [
     { to: "/", label: "Home", icon: <House strokeWidth={0.75} />, id: "home" },
-    { to: "/delivery", label: "Delivery", icon: <ShoppingBag strokeWidth={0.75} />, id: "delivery" },
+    { to: "/orders", label: "Orders", icon: <ShoppingBag strokeWidth={0.75} />, id: "orders" },
     { to: "/menu", label: "Menu", icon: <ChefHat strokeWidth={0.75} />, id: "menu" },
     { to: "/about", label: "About", icon: <Info strokeWidth={0.75} />, id: "about" },
     { to: "/profile", label: "Profile", icon: <CircleUser strokeWidth={0.75} />, id: "profile" },
@@ -21,7 +21,7 @@ const MenuFooter = () => {
             [scope.current, { y: 0 }, { duration: 0.4, ease: "easeOut" }],
             
             ["[data-nav='home']", { opacity: 1, y: 0 }, { duration: 0.15 }],
-            ["[data-nav='delivery']", { opacity: 1, y: 0 }, { duration: 0.15 }],
+            ["[data-nav='orders']", { opacity: 1, y: 0 }, { duration: 0.15 }],
             ["[data-nav='menu']", { opacity: 1, y: 0 }, { duration: 0.15 }],
             ["[data-nav='about']", { opacity: 1, y: 0 }, { duration: 0.15 }],
             ["[data-nav='profile']", { opacity: 1, y: 0 }, { duration: 0.15 }]

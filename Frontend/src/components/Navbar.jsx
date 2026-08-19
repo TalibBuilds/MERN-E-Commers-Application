@@ -13,7 +13,7 @@ import { setUser } from "../redux/userSlice";
 
 const navLinks = [
     { to: "/", label: "Home" },
-    { to: "/delivery", label: "Delivery" },
+    { to: "/orders", label: "Orders" },
     { to: "/menu", label: "Menu" },
     { to: "/about", label: "About" },
     { to: "/profile", label: "Profile" }

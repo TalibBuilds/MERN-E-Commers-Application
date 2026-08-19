@@ -34,9 +34,9 @@ const features = [
   },
   {
     icon: Truck,
-    title: "Reliable Delivery",
+    title: "Reliable orders",
     description:
-      "Your food should reach you fresh and ready to enjoy. Our delivery experience is designed around convenience, speed, and reliability.",
+      "Your food should reach you fresh and ready to enjoy. Our orders experience is designed around convenience, speed, and reliability.",
   },
 ];
 
@@ -64,7 +64,7 @@ const values = [
 const stats = [
   { number: "Fresh", label: "Ingredients" },
   { number: "5+", label: "Food Categories" },
-  { number: "Fast", label: "Delivery Experience" },
+  { number: "Fast", label: "orders Experience" },
   { number: "100%", label: "Customer Focus" },
 ];
 
@@ -132,7 +132,7 @@ const About = () => {
                 whileTap={{ scale: 0.95 }}
                 className="px-7 py-3 rounded-full border border-[#03071E]/20 font-poppins"
               >
-                <Link to={'/delivery'}>
+                <Link to={'/orders'}>
                   How We Deliver
                 </Link>
               </motion.div>
@@ -229,7 +229,7 @@ const About = () => {
 
           <p className="mt-5 text-gray-600 font-poppins leading-8">
             Our goal is to combine delicious food, a smooth
-            digital experience, reliable delivery, and a strong
+            digital experience, reliable orders, and a strong
             focus on customer satisfaction into one simple
             experience.
           </p>
@@ -459,7 +459,7 @@ const About = () => {
       </section>
 
 
-      {/* ================= DELIVERY ================= */}
+      {/* ================= orders ================= */}
       <section className="px-6 md:px-16 lg:px-24 py-24">
 
         <div className="max-w-7xl mx-auto rounded-[3rem] bg-[#03071E] text-white p-8 md:p-14 grid lg:grid-cols-2 gap-12 items-center">
@@ -477,7 +477,7 @@ const About = () => {
             </h2>
 
             <p className="mt-6 text-white/60 font-poppins leading-8">
-              With location-based delivery, Dish & Co. helps
+              With location-based orders, Dish & Co. helps
               connect your order with your destination so you
               can enjoy your favorite food without unnecessary
               hassle.
@@ -495,7 +495,7 @@ const About = () => {
               <div className="flex items-center gap-4">
                 <Clock3 className="text-[#FFBA08]" />
                 <span className="font-poppins">
-                  Designed for a smooth delivery experience
+                  Designed for a smooth orders experience
                 </span>
               </div>
 
@@ -550,7 +550,7 @@ const About = () => {
 
           <p className="mt-5 text-gray-600 font-poppins leading-8">
             As Dish & Co. grows, our goal is to continue improving
-            our food selection, customer experience, delivery
+            our food selection, customer experience, orders
             system, and technology while staying true to the
             simple reason we started — our love for good food.
           </p>
