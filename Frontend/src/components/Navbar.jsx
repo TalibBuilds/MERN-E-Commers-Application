@@ -1,15 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useLocation } from 'react-router-dom'
 import SerchFoodInput from "./SerchFoodInput";
-
-
-import AxiosInstence from "../utils/AxiosInstence";
-import { setUser } from "../redux/userSlice";
+import AddLocation from "./AddLocation";
 
 const navLinks = [
     { to: "/", label: "Home" },
@@ -50,88 +45,8 @@ const textOptions = [
 const Navbar = () => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const currentUser = useSelector((state) => state.user.currentUser);
-
-    const [loading, setLoading] = useState(false);
-
-
-    const getLocation = () => {
-
-        if (loading) return;
-
-        if (!navigator.geolocation) {
-            toast.error("Geolocation is not supported");
-            return;
-        }
-
-        setLoading(true);
-
-        navigator.geolocation.getCurrentPosition(
-
-            async (position) => {
-
-                try {
-
-                    const { latitude, longitude } = position.coords;
-
-                    // Reverse Geocoding
-                    const { data } = await axios.get(
-                        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
-                    );
-
-                    const address = data.address;
-
-                    const locationData = {
-                        latitude,
-                        longitude,
-                        city:
-                            address.city ||
-                            address.town ||
-                            address.village ||
-                            address.suburb ||
-                            address.county ||
-                            "Unknown",
-                        fullAddress: data.display_name,
-                    };
-
-                    // Save to MongoDB*********
-                    const res = await AxiosInstence.patch(
-                        "/api/auth/location",
-                        locationData
-                    );
-
-                    // Update Redux******
-                    dispatch(setUser(res.data.user));
-
-                    toast.success("Location added successfully");
-
-                } catch (err) {
-
-                    console.error(err);
-
-                    toast.error(
-                        err.response?.data?.message ||
-                        "Unable to fetch location"
-                    );
-
-                } finally {
-                    setLoading(false);
-                }
-
-            },
-
-            (error) => {
-
-                setLoading(false);
-
-                toast.error(error.message);
-
-            }
-
-        );
-    };
 
 
     // textoption animation*****
@@ -231,7 +146,7 @@ const Navbar = () => {
                                     currentUser?.location?.city ? (
 
                                         <div
-                                            className="max-w-42 sm:max-w-48 md:max-w-64 lg:max-w-80 px-3 py-2 rounded-full bg-[#6f5f3f]  text-[#F5F2EB] shadow-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4)] text-xs font-poppins truncate select-none cursor-pointer"
+                                            className="max-w-42 sm:max-w-48 md:max-w-64 lg:max-w-80 px-3 py-2 rounded-full bg-[#6f5f3f]  text-[#F5F2EB] shadow-[0_10px_25px_rgba(0,0,0,0.18),inset_0_1px_0_0_rgba(255,255,255,0.4)] text-xs font-poppins truncate select-none cursor-pointer"
                                             title={currentUser?.location?.fullAddress}
                                         >
                                             {currentUser?.location?.fullAddress}
@@ -239,20 +154,7 @@ const Navbar = () => {
 
                                     ) : (
                                         // { if location is not available then show button to add location }***
-                                        <motion.button
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            transition={{
-                                                type: "spring",
-                                                stiffness: 400,
-                                                damping: 10,
-                                            }}
-                                            disabled={loading}
-                                            onClick={getLocation}
-                                            className="bg-[#03071E] text-[#F5F2EB] rounded-full px-4 py-2 text-xs font-poppins disabled:opacity-60 cursor-pointer"
-                                        >
-                                            {loading ? "Getting Location..." : "Add Location 📍"}
-                                        </motion.button>
+                                        <AddLocation />
 
                                     )
                                 ) :

@@ -20,6 +20,7 @@ const InitialLoader = lazy(() => import('./components/InitialLoader'))
 const LadingPage = lazy(() => import('./pages/LadingPage'))
 const About = lazy(() => import('./pages/About'))
 const Orders = lazy(() => import('./pages/Orders'))
+const Payment = lazy(() => import('./pages/Payment'))
 const Menu = lazy(() => import('./pages/Menu'))
 const Profile = lazy(() => import('./pages/Profile'))
 const Register = lazy(() => import('./pages/Register'))
@@ -33,11 +34,11 @@ const ProtectedRoute = ({ currentUser, children, requireAdmin = false }) => {
   if (!currentUser) {
     return <Navigate to="/login" replace />
   }
-  
+
   if (requireAdmin && currentUser.role !== 'admin') {
     return <Navigate to="/" replace />
   }
-  
+
   return children
 }
 
@@ -81,20 +82,28 @@ const App = () => {
 
         {/* in profile Navbar not show ** */}
         {!location.pathname.startsWith('/profile') && <Navbar />}
-        
+
         {/* Note: Your custom ScrollToTop hook might conflict with Lenis. 
             If page jumps feel broken, remove <ScrollToTop /> since LenisRouteSync handles it. */}
         <ScrollToTop />
-        
+
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path='/' element={<LadingPage />} />
             <Route path='/about' element={<About />} />
             <Route path='/orders' element={<Orders />} />
+            <Route
+              path='/payment'
+              element={
+                <ProtectedRoute currentUser={currentUser}>
+                  <Payment />
+                </ProtectedRoute>
+              }
+            />
             <Route path='/menu' element={<Menu />} />
-            <Route path='/profile' element={<Profile /> }/>
-            
-            <Route path='/register' element={!currentUser ? <Register /> : <Navigate to="/" />}/>
+            <Route path='/profile' element={<Profile />} />
+
+            <Route path='/register' element={!currentUser ? <Register /> : <Navigate to="/" />} />
             <Route path="/login" element={!currentUser ? <Login /> : <Navigate to="/" />} />
 
             {/* ADMIN ACCESS ROUTEs */}
@@ -108,7 +117,7 @@ const App = () => {
             />
           </Routes>
         </Suspense>
-        
+
         <MenuFooter />
         <Footer />
       </div>

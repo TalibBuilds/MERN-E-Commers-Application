@@ -5,6 +5,7 @@
 
 
 
+const mongoose = require('mongoose');
 const Food = require('../models/uploadFood.model');
 
 async function getAllFoods(req, res) {
@@ -92,13 +93,22 @@ async function getFoodById(req, res) {
     try {
         const { id } = req.params;
 
+        if (!mongoose.isValidObjectId(id)) {
+            return res.status(400).json({
+                message: 'Invalid food item id',
+            });
+        }
+
         const food = await Food.findById(id);
 
         if (!food) {
             return res.status(404).json({
-                message: 'Food item not found',
+                message: 'Invalid Food',
             });
         }
+
+        console.log('[Payment check] Food ID:', food._id.toString());
+        console.log('[Payment check] Real price from database:', food.price);
 
         return res.status(200).json({
             message: 'Food item fetched successfully',

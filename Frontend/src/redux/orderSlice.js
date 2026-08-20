@@ -36,6 +36,11 @@ const orderSlice = createSlice({
         clearOrders: (state) => {
             state.orders = [];
         },
+        removeOrderById: (state, action) => {
+            state.orders = state.orders.filter(
+                (order) => order._id !== action.payload
+            );
+        },
         setOrdersLoading: (state, action) => {
             state.loading = action.payload;
         },
@@ -49,6 +54,7 @@ export const {
     setOrders,
     addOrder,
     clearOrders,
+    removeOrderById,
     setOrdersLoading,
     setOrdersError,
 } = orderSlice.actions;

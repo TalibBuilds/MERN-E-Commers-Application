@@ -30,6 +30,7 @@ const authRoutes = require('./Routes/auth.routes');
 const adminRoutes = require('./Routes/admin.routes');
 // food fetching api routes****//
 const foodRoute = require('./Routes/food.routes')
+const orderRoute = require('./Routes/order.routes')
 
 
 // Register authentication routes under /api/auth
@@ -40,5 +41,6 @@ app.use('/api/admin', adminRoutes);
 
 //  food fetching api ***
 app.use('/api/food', foodRoute)
+app.use('/api/orders', orderRoute)
 
 module.exports = app;

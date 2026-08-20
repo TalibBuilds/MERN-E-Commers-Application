@@ -1,17 +1,46 @@
 import { useDispatch, useSelector } from "react-redux";
 import { clearOrders } from "../redux/orderSlice";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { X } from "lucide-react";
+import AddLocation from "../components/AddLocation";
+import AxiosInstence from "../utils/AxiosInstence";
 
 const Orders = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const orders = useSelector((state) => state.orders.orders);
+    const [showLocationPopup, setShowLocationPopup] = useState(false);
+    const pendingOrder = null;
 
-    const total = orders.reduce(
-        (sum, order) => sum + order.price * order.quantity,
-        0
-    );
+    const handleProceedToPayment = async (order) => {
+        try {
+            const response = await AxiosInstence.get(
+                `/api/food/items/${order._id}`
+            );
+
+            console.log("Selected food from backend:", response.data.food);
+            navigate("/payment", {
+                state: {
+                    order: {
+                        ...response.data.food,
+                        quantity: order.quantity,
+                    },
+                },
+            });
+        } catch (error) {
+            console.error(
+                "Unable to fetch selected food:",
+                error.response?.data || error.message
+            );
+        }
+
+    };
+
+
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white px-4 py-24 sm:px-8">
+        <div className="min-h-screen bg-linear-to-b from-gray-50 to-white px-4 py-1.5 md:py-24 sm:px-8">
             <div className="mx-auto max-w-4xl">
                 <div className="mb-8 flex items-center justify-between gap-4">
                     <div>
@@ -45,12 +74,12 @@ const Orders = () => {
                         {orders.map((order) => (
                             <div
                                 key={order._id}
-                                className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm"
+                                className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl bg-white p-3 shadow-sm sm:gap-4 sm:p-4"
                             >
                                 <img
                                     src={order.foodImage}
                                     alt={order.foodName}
-                                    className="h-20 w-20 rounded-xl object-cover"
+                                    className="h-16 w-16 rounded-xl object-cover sm:h-20 sm:w-20"
                                 />
                                 <div className="min-w-0 flex-1">
                                     <h2 className="truncate font-poppins font-semibold text-[#03071E]">
@@ -60,23 +89,59 @@ const Orders = () => {
                                         ₹{order.price} x {order.quantity}
                                     </p>
                                 </div>
-                                <p className="font-poppins font-semibold text-[#E85D04]">
-                                    ₹{(order.price * order.quantity).toFixed(2)}
-                                </p>
+                                <div className="flex min-w-0 flex-col items-end gap-9">
+                                    <p className="whitespace-nowrap font-poppins text-sm font-semibold text-[#E85D04] sm:text-base">
+                                        ₹{(order.price * order.quantity).toFixed(2)}
+                                    </p>
+                                    <button
+                                        type="button"
+                                        onClick={() => handleProceedToPayment(order)}
+                                        className="whitespace-nowrap rounded-full bg-[#E85D04] px-3 py-2 font-poppins text-sm text-white transition hover:bg-[#F48C05] sm:px-4 sm:py-3 sm:text-[11px]"
+                                    >
+                                        Proceed to payment
+                                    </button>
+                                </div>
                             </div>
                         ))}
 
-                        <div className="flex items-center justify-between border-t border-gray-200 pt-5">
-                            <span className="font-poppins text-lg font-semibold text-[#03071E]">
-                                Total
-                            </span>
-                            <span className="font-poppins text-xl font-bold text-[#E85D04]">
-                                ₹{total.toFixed(2)}
-                            </span>
-                        </div>
+
                     </div>
                 )}
             </div>
+
+            {showLocationPopup && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4">
+                    <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+                        <button
+                            type="button"
+                            onClick={() => setShowLocationPopup(false)}
+                            aria-label="Close location popup"
+                            className="absolute right-4 top-4 rounded-full p-2 text-gray-500 transition hover:bg-gray-100"
+                        >
+                            <X size={20} />
+                        </button>
+
+                        <p className="font-poppins text-sm text-[#E85D04]">
+                            Delivery address required
+                        </p>
+                        <h2 className="mt-1 pr-8 font-cinzel text-2xl font-bold text-[#03071E]">
+                            Add your location
+                        </h2>
+                        <p className="mt-2 font-poppins text-sm text-gray-500">
+                            Add a delivery location before continuing to payment.
+                        </p>
+
+                        <div className="mt-6 flex justify-end">
+                            <AddLocation
+                                onLocationAdded={() => {
+                                    setShowLocationPopup(false);
+                                    navigate("/payment", { state: { order: pendingOrder } });
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
