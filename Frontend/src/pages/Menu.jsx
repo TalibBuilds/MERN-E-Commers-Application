@@ -162,7 +162,7 @@ const Menu = () => {
     }, [searchTerm]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
 
             {/* Header */}
             <SliderBanner slides={slides} />
@@ -192,7 +192,7 @@ const Menu = () => {
                             animate={{ y: 0 }}
                             exit={{ y: "100%" }}
                             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                            className="fixed inset-x-0 bottom-0 z-50 min-h-[22rem] rounded-t-3xl border-t border-[#E85D04]/30 bg-white shadow-2xl px-4 sm:px-6 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]"
+                            className="fixed inset-x-0 bottom-0 z-50 min-h-88 rounded-t-3xl border-t border-[#E85D04]/30 bg-white shadow-2xl px-4 sm:px-6 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]"
                         >
                             {/* drag handle */}
                             <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-black/10" />
@@ -213,7 +213,7 @@ const Menu = () => {
                                     <img
                                         src={selectedFood.foodImage}
                                         alt={selectedFood.foodName}
-                                        className="h-16 w-16 sm:h-20 sm:w-20 rounded-xl object-cover flex-shrink-0"
+                                        className="h-16 w-16 sm:h-20 sm:w-20 rounded-xl object-cover shrink-0"
                                     />
                                     <div className="min-w-0 flex-1 pr-6">
                                         <h3 className="truncate font-poppins font-semibold text-[#03071E] text-base sm:text-lg">
@@ -292,7 +292,7 @@ const Menu = () => {
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.97 }}
                                         type="button"
-                                        className="flex-1 sm:flex-none sm:min-w-[180px] rounded-full bg-[#E85D04] px-6 py-3 font-poppins font-medium text-sm text-white"
+                                        className="flex-1 sm:flex-none sm:min-w-45 rounded-full bg-[#E85D04] px-6 py-3 font-poppins font-medium text-sm text-white"
                                     >
                                         Add to cart
                                     </motion.button>
