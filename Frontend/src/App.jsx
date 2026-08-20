@@ -69,9 +69,9 @@ const App = () => {
   // show the branded intro once, then reveal the real app***
   const [showIntro, setShowIntro] = useState(true)
 
-  // if (showIntro) {
-  //   return <InitialLoader onDone={() => setShowIntro(false)} />
-  // }
+  if (showIntro) {
+    return <InitialLoader onDone={() => setShowIntro(false)} />
+  }
 
   // 3. WRAP THE RENDERED RETURN WITH <ReactLenis root>
   return (
@@ -81,7 +81,7 @@ const App = () => {
         <Toaster position="top center" reverseOrder={false} />
 
         {/* in profile Navbar not show ** */}
-        {!location.pathname.startsWith('/profile') && <Navbar />}
+        {!['/profile','/orders','/payment','/about'].some(path => location.pathname.startsWith(path))&&<Navbar />}
 
         {/* Note: Your custom ScrollToTop hook might conflict with Lenis. 
             If page jumps feel broken, remove <ScrollToTop /> since LenisRouteSync handles it. */}

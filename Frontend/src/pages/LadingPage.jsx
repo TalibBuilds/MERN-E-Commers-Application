@@ -109,8 +109,7 @@ const LadingPage = () => {
             whileHover={{ scale: 1.1, opacity: 0.8 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             exit={{ scale: 0.7, opacity: 0 }}
-
-            className='w-3' src="/images/blackmobile.webp" alt="Blank UI" className="w-full h-auto block" />
+             src="/images/blackmobile.webp" alt="Blank UI" className="w-full h-auto block" />
 
           <motion.img
             initial={{ rotate: 0 }}

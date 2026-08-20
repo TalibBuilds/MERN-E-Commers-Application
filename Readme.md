@@ -9,7 +9,7 @@ WESITE COLORS:======
 #DC2F02 --- TOMATO ORANGE---
 #E85D04 ---  ORANGE---
 #F48C05 --- LIGHT ORANGE---
-#FAA307 ---  TURMARIC---
+#FAA307 ---  TURMARIC--- 
 #FFBA08 ---  FROOTI---
 text-color-----
 
