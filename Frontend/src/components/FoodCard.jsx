@@ -16,7 +16,7 @@ const FoodCard = ({
             transition={{ ease: easeIn, duration: 0.7, type: "spring", stiffness: 400, damping: 10 }}
             whileTap={{ scale: 0.95 }}
             viewport={{ once: true }}
-            className="w-full aspect-[3/4] rounded-lg flex flex-col overflow-hidden shadow-lg hover:shadow-md transition-shadow cursor-pointer">
+            className="w-full aspect-3/4 rounded-lg flex flex-col overflow-hidden shadow-lg hover:shadow-md transition-shadow cursor-pointer">
 
             {/* Image */}
             <div className="w-full h-40 sm:h-36 md:h-60 overflow-hidden">
