@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const AxiosInstence = axios.create({
     baseURL: BASE_URL,
@@ -10,6 +10,5 @@ const AxiosInstence = axios.create({
         "Content-Type": "application/json",
     }
 })
-
 
 export default AxiosInstence;
