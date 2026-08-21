@@ -1,2 +1,28 @@
+# Dependencies
 node_modules/
+
+# Environment variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Uploads (agar multer/file upload use ho raha hai)
+uploads/
+
+# Editor & OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Build (agar TypeScript ya babel use ho raha hai)
+dist/
+build/
