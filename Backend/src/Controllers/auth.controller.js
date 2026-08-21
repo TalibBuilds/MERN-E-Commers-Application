@@ -4,11 +4,9 @@ const jwt = require('jsonwebtoken')
 
 // register controller**
 async function registerUser(req, res) {
-    console.log("login hit")
     try {
         const { userName, email, mobileNumber, password, role } = req.body;
 
-        // Basic input validation******
         if (!userName || !mobileNumber || !password || !email) {
             return res.status(400).json({
                 message: "Please fill all required fields (userName, mobileNumber, email, password)"
@@ -21,7 +19,6 @@ async function registerUser(req, res) {
             })
         }
 
-        // Check for existing user by mobile or email******
         const existingUser = await userModel.findOne({
             $or: [
                 { mobileNumber: mobileNumber },
@@ -35,10 +32,8 @@ async function registerUser(req, res) {
             });
         }
 
-        // Hash the password***
         const hashPassword = await bcrypt.hash(password, 10);
 
-        // Create user******
         const user = await userModel.create({
             userName,
             mobileNumber,
@@ -47,7 +42,6 @@ async function registerUser(req, res) {
             role: role || 'customer'
         });
 
-        // Generate JWT token**********
         const token = jwt.sign(
             {
                 id: user._id,
@@ -57,17 +51,9 @@ async function registerUser(req, res) {
             { expiresIn: '30d' }
         );
 
-        // token save in cookie***//
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-        });
-
-        // Respond with account creation********
         return res.status(201).json({
             message: "Account created successfully",
+            token: token,   // for render issu ADD KIYA
             user: {
                 id: user._id,
                 userName: user.userName,
@@ -123,15 +109,9 @@ async function loginUser(req, res) {
             { expiresIn: '30d' }
         )
 
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",  // ✅ fix
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-        });
-
         return res.status(200).json({
             message: "user logged in",
+            token: token,   // render issu **
             user: {
                 id: user._id,
                 userName: user.userName,
@@ -142,7 +122,6 @@ async function loginUser(req, res) {
                 updatedAt: user.updatedAt
             },
         })
-
 
     } catch (err) {
         console.error(err);
@@ -219,11 +198,10 @@ async function updateLocation(req, res) {
 // logout controller****
 async function logoutUser(req, res) {
     try {
-        res.cookie("token", token, {
+        res.clearCookie("token", {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",  // ✅ fix
-            maxAge: 30 * 24 * 60 * 60 * 1000,
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         });
         return res.status(200).json({ message: "Logged out successfully" });
     } catch (err) {

@@ -11,4 +11,13 @@ const AxiosInstence = axios.create({
     }
 })
 
+// Har request ke saath token automatically attach karein
+AxiosInstence.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
 export default AxiosInstence;

@@ -21,20 +21,24 @@ const Login = () => {
         },
     });
 
-    const onSubmit = async (data) => {
-        try {
-            const response = await AxiosInstence.post("/api/auth/login", data);
-            dispatch(setUser(response.data?.user))
-            toast.success(response.data?.message || "Login successful");
-            navigate(-1);
-            
-        } catch (err) {
-            console.error(err);
-            toast.error(
-                err.response?.data?.message || "Something went wrong"
-            );
-        }
-    };
+    
+   const onSubmit = async (data) => {
+    try {
+        const response = await AxiosInstence.post("/api/auth/login", data);
+        
+        localStorage.setItem("token", response.data?.token);
+        
+        dispatch(setUser(response.data?.user))
+        toast.success(response.data?.message || "Login successful");
+        navigate(-1);
+        
+    } catch (err) {
+        console.error(err);
+        toast.error(
+            err.response?.data?.message || "Something went wrong"
+        );
+    }
+};
     
 
     return (

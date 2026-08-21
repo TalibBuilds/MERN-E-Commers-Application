@@ -23,7 +23,7 @@ const Profile = () => {
 
   const MySwal = withReactContent(Swal)
 
-  const handleLogout = async () => {
+ const handleLogout = async () => {
     const result = await MySwal.fire({
       title: 'Confirm logout',
       text: 'Are you sure you want to logout?',
@@ -36,6 +36,7 @@ const Profile = () => {
     if (result.isConfirmed) {
       try {
         await AxiosInstence.post('/api/auth/logout')
+        localStorage.removeItem('token')   // 👈 ADD KIYA — token localStorage se remove karein
         dispatch(clearUser())
         navigate('/login')
         toast.success('Logged out')
@@ -44,7 +45,7 @@ const Profile = () => {
         toast.error('Logout failed')
       }
     }
-  }
+}
 
   // User Details fetched using redux ****
   const userDetails = [

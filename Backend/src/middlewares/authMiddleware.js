@@ -1,9 +1,13 @@
 const jwt = require("jsonwebtoken");
 
 // TOKEN VERIFY MIDDLEWARE****
- function authMiddleware(req, res, next) {
+function authMiddleware(req, res, next) {
     try {
-        const token = req.cookies.token;
+        // Authorization header se token nikalein (Bearer token format)
+        const authHeader = req.headers.authorization;
+        const token = authHeader && authHeader.startsWith('Bearer ')
+            ? authHeader.split(' ')[1]
+            : req.cookies?.token; // fallback, agar kabhi cookie se bhi aaye
 
         if (!token) {
             return res.status(401).json({
@@ -14,7 +18,6 @@ const jwt = require("jsonwebtoken");
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         req.user = decoded;
-        
 
         next();
 
@@ -24,8 +27,5 @@ const jwt = require("jsonwebtoken");
         });
     }
 }
-
-
-
 
 module.exports = { authMiddleware };

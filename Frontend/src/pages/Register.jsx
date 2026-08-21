@@ -20,21 +20,23 @@ const Register = () => {
         },
     });
 
-const onSubmit = async (data) => {
-    try {
-        console.log(data);
-        const response = await AxiosInstence.post("/api/auth/register", data);
+    const onSubmit = async (data) => {
+        try {
+            console.log(data);
+            const response = await AxiosInstence.post("/api/auth/register", data);
 
-        if (response.status === 201) {
-            toast.success(response.data?.message || "Account created successfully");
-            navigate(-1);
+            if (response.status === 201) {
+                localStorage.setItem("token", response.data?.token);
+
+                toast.success(response.data?.message || "Account created successfully");
+                navigate(-1);
+            }
+
+        } catch (err) {
+            console.error(err);
+            toast.error(err.response?.data?.message || "Something went wrong");
         }
-
-    } catch (err) {
-        console.error(err);
-        toast.error(err.response?.data?.message || "Something went wrong");
-    }
-};
+    };
 
     return (
         <section className="min-h-screen w-full bg-[#F5F2EB] flex flex-col md:flex-row font-[Poppins] md:p-15 md:pt-29">

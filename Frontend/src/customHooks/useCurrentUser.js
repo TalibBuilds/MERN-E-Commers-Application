@@ -12,7 +12,6 @@ const useCurrentUser = () => {
 
         const fetchCurrentUser = async () => {
             try {
-                 console.log("🔥 /me API CALL");
                 const response = await AxiosInstence.get("/api/auth/me");
                 dispatch(setUser(response.data.user));
             } catch (err) {
