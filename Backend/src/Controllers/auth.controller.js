@@ -61,7 +61,7 @@ async function registerUser(req, res) {
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             maxAge: 30 * 24 * 60 * 60 * 1000,
         });
 
@@ -218,17 +218,17 @@ async function updateLocation(req, res) {
 
 // logout controller****
 async function logoutUser(req, res) {
-  try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
-    });
-    return res.status(200).json({ message: "Logged out successfully" });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: "Logout failed" });
-  }
+    try {
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+        });
+        return res.status(200).json({ message: "Logged out successfully" });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Logout failed" });
+    }
 }
 
 module.exports = { registerUser, loginUser, getCurrentUser, updateLocation, logoutUser }

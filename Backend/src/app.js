@@ -5,13 +5,22 @@ const cookieparser = require('cookie-parser')
 
 
 // CORS POLICY****************
+const allowedOrigins = [
+    'http://localhost:5173',
+    process.env.FRONTEND_URL, // production frontend URL, Render env variable se aayega
+];
+
 app.use(cors({
     origin: function (origin, callback) {
         // allow requests with no origin (like Postman, curl, mobile apps)
         if (!origin) return callback(null, true);
 
-        // allow localhost and any local network IP on port 5173
-        if (origin.match(/^http:\/\/localhost:5173$/) || origin.match(/^http:\/\/192\.168\.\d+\.\d+:5173$/)) {
+        // allow localhost, local network IPs (dev), aur production frontend URL
+        if (
+            origin.match(/^http:\/\/localhost:5173$/) ||
+            origin.match(/^http:\/\/192\.168\.\d+\.\d+:5173$/) ||
+            origin === process.env.CLIENT_URL
+        ) {
             return callback(null, true);
         }
 
