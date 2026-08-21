@@ -30,6 +30,7 @@ const Footer = lazy(() => import('./components/Footer'))
 // admin pages
 const UploadFood = lazy(() => import('./pages/adminpages/UploadFood'))
 
+
 const ProtectedRoute = ({ currentUser, children, requireAdmin = false }) => {
   if (!currentUser) {
     return <Navigate to="/login" replace />
