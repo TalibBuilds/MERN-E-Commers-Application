@@ -144,7 +144,7 @@ const UploadFood = () => {
                 borderColor: dragActive ? ORANGE : "rgba(3,7,30,0.14)",
               }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative h-72 sm:h-80 md:h-full min-h-[280px] rounded-xl border-2 border-dashed cursor-pointer overflow-hidden flex items-center justify-center"
+              className="relative h-72 sm:h-80 md:h-full min-h-70 rounded-xl border-2 border-dashed cursor-pointer overflow-hidden flex items-center justify-center"
             >
               <input
                 ref={fileInputRef}
