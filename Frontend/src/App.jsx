@@ -28,7 +28,7 @@ const Login = lazy(() => import('./pages/Login'))
 const Footer = lazy(() => import('./components/Footer'))
 
 // admin pages
-const UploadFood = lazy(() => import('./pages/admin pages/UploadFood'))
+const UploadFood = lazy(() => import('./pages/adminpages/UploadFood'))
 
 const ProtectedRoute = ({ currentUser, children, requireAdmin = false }) => {
   if (!currentUser) {
@@ -69,9 +69,9 @@ const App = () => {
   // show the branded intro once, then reveal the real app***
   const [showIntro, setShowIntro] = useState(true)
 
-  // if (showIntro) {
-  //   return <InitialLoader onDone={() => setShowIntro(false)} />
-  // }
+  if (showIntro) {
+    return <InitialLoader onDone={() => setShowIntro(false)} />
+  }
 
   // 3. WRAP THE RENDERED RETURN WITH <ReactLenis root>
   return (
