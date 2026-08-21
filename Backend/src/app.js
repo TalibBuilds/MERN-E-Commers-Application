@@ -19,7 +19,7 @@ app.use(cors({
         if (
             origin.match(/^http:\/\/localhost:5173$/) ||
             origin.match(/^http:\/\/192\.168\.\d+\.\d+:5173$/) ||
-            origin === process.env.CLIENT_URL
+            origin === process.env.FRONTEND_URL
         ) {
             return callback(null, true);
         }
